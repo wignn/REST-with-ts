@@ -4,14 +4,13 @@ import {
   CreateUserRequest,
   LoginUserRequest,
   toUserResponse,
+  UpdateUserRequest,
   UserRessponse,
 } from "../model/user-mode";
 import { prismaClient } from "../application/database";
 import { ResponseError } from "../error/response-error";
 import bcrypt from "bcrypt";
 import { v4 as uuid } from "uuid";
-import { UserRequest } from "../type/user-request";
-import { NextFunction, Response, Request } from "express";
 import { User } from "@prisma/client";
 
 export class UserService {
@@ -80,5 +79,23 @@ export class UserService {
 
   static async get(user: User): Promise<UserRessponse> {  
     return toUserResponse(user);
+  }
+
+  static async update(request: UpdateUserRequest, user: User): Promise<UserRessponse> {
+    const updateRequest = validation.validate(UserValidation.UPDATE, request);
+    if(updateRequest.name){
+      user.name = updateRequest.name;
+    }
+
+    if (updateRequest.password) {
+      user.password = await bcrypt.hash(updateRequest.password, 10);
+    }
+    const result = await prismaClient.user.update({
+      where: {
+        username: user.username,
+      },
+      data: user,
+    });
+    return toUserResponse(result);
   }
 }
