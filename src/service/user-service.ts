@@ -2,6 +2,7 @@ import { UserValidation } from "./../validation/user-validation";
 import { validation } from "./../validation/validation";
 import {
   CreateUserRequest,
+  LoginUserRequest,
   toUserResponse,
   UserRessponse,
 } from "../model/user-mode";
@@ -39,7 +40,7 @@ export class UserService {
     return toUserResponse(user);
   }
 
-  static async login(request: CreateUserRequest): Promise<UserRessponse> {
+  static async login(request: LoginUserRequest): Promise<UserRessponse> {
     const loginRequest = validation.validate(UserValidation.LOGIN, request);
     let user = await prismaClient.user.findUnique({
       where: {
