@@ -1,13 +1,13 @@
 
 export type UserRessponse = {
-    id: string;
+    id: number;
     name: string;
     email: string;
+    token?: string;
 }
 
 
 export type CreateUserRequest = {
-    name: string;
     username: string;
     email: string;
     password: string;
