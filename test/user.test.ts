@@ -88,3 +88,24 @@ describe("GET /api/users/current", () => {
     expect(response.body.errors).toBe("Unauthorized");
   });
 });
+
+describe("PATCH /api/users/current", () => {
+  beforeEach(async () => {
+    await userTest.create();
+  });
+  afterEach(async () => {
+    await userTest.delete();
+  });
+  it("should be reject to update current user", async () => {
+    const response = await supertest(web)
+    .patch("/api/users/current")
+    .set("X-API-TOKEN", "test")
+    .send({
+      name: "test",
+      password:"",
+    });
+    logger.debug(response.body);
+    expect(response.status).toBe(400);
+
+  })
+})
