@@ -1,3 +1,4 @@
+
 import { logger } from "../src/application/loggin";
 import { web } from "./../src/application/web";
 import supertest from "supertest";
@@ -56,5 +57,34 @@ describe("POST /api/users/login", () => {
   });
   afterEach(async () => {
     await userTest.delete();
+  });
+});
+
+describe("GET /api/users/current", () => {
+  beforeEach(async () => {
+    await userTest.create();
+  });
+  afterEach(async () => {
+    await userTest.delete();
+  });
+
+  it("should be able to get current user", async () => {
+    const response = await supertest(web)
+    .get("/api/users/current")
+    .set("X-API-TOKEN", "test");
+    logger.debug(response.body);
+    expect(response.status).toBe(200);
+    expect(response.body.data.username).toBe("test");
+    expect(response.body.data.name).toBe("test");
+
+  });
+
+  it("should reject if token invalid", async () => {
+    const response = await supertest(web)
+    .get("/api/users/current")
+    .set("X-API-TOKEN", "salah");
+    logger.debug(response.body);
+    expect(response.status).toBe(401);
+    expect(response.body.errors).toBe("Unauthorized");
   });
 });
