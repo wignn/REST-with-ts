@@ -1,6 +1,10 @@
 import { UserValidation } from "./../validation/user-validation";
 import { validation } from "./../validation/validation";
-import { CreateUserRequest, UserRessponse } from "../model/user-mode";
+import {
+  CreateUserRequest,
+  toUserResponse,
+  UserRessponse,
+} from "../model/user-mode";
 import { prismaClient } from "../application/database";
 import { ResponseError } from "../error/response-error";
 import bcrypt from "bcrypt";
@@ -31,6 +35,6 @@ export class UserService {
     const user = await prismaClient.user.create({
       data: registerRequest,
     });
-
+    return toUserResponse(user);
   }
 }

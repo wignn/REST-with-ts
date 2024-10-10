@@ -8,7 +8,9 @@ export type UserRessponse = {
 }
 
 
+
 export type CreateUserRequest = {
+    name: string;
     username: string;
     email: string;
     password: string;
