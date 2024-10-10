@@ -7,7 +7,7 @@ describe('POST /api/users', () => {
         const response = await supertest(web)
         .post('/api/users')
         .send({
-            username: 'mjkd',
+            username: '',
             password: '',
             email: '',
             name: ''
