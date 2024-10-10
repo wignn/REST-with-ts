@@ -10,6 +10,7 @@ Request Body :
 {
   "username": "wign",
   "password": "secret",
+  "email": "wign@gmail.com",
   "name": "wign66"
 }
 ```
@@ -19,6 +20,7 @@ Response Body (Success) :
 ```json
     "data":{
         "username":"wign",
+        "email": "wign@gmail.com",
         "name":"wign66"
     }
 ```
@@ -35,7 +37,7 @@ Endpoint: POST /api/users/login
 
 ```json
 {
-  "username": "wign",
+  "email": "wign@gmail.com",
   "password": "secret"
 }
 ```
@@ -47,6 +49,7 @@ Response Body (Success):
   "data": {
     "username": "wign",
     "name": "wign66",
+    "email": "wign@gmail.com",
     "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
   }
 }
@@ -72,6 +75,7 @@ Response Body (Success):
 {
   "data": {
     "username": "wign",
+    "email": "wign@gmail.com",
     "name": "wign66"
   }
 }

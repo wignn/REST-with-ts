@@ -15,6 +15,7 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "@prisma/client": "^5.20.0",
     "Babel": "^0.0.1",
     "bcrypt": "^5.1.1",
     "express": "^4.21.1",
@@ -27,6 +28,7 @@
     "@babel/preset-env": "^7.25.7",
     "@babel/preset-typescript": "^7.25.7",
     "@jest/globals": "^29.7.0",
+    "@types/express": "^5.0.0",
     "@types/supertest": "^6.0.2",
     "babel-jest": "^29.7.0",
     "jest": "^29.7.0",
