@@ -1,0 +1,7 @@
+{
+    "terminal.integrated.enableImages": true,
+    "terminal.integrated.defaultProfile.windows": "Windows PowerShell",
+    "terminal.integrated.autoReplies": {
+        
+    }
+}

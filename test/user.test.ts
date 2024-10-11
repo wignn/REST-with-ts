@@ -99,7 +99,7 @@ describe("PATCH /api/users/current", () => {
   afterEach(async () => {
     await userTest.delete();
   });
-  
+
   it("should be reject to update current user", async () => {
     const response = await supertest(web)
       .patch("/api/users/current")
@@ -115,14 +115,25 @@ describe("PATCH /api/users/current", () => {
   it("should be reject to update if token is wrong", async () => {
     const response = await supertest(web)
       .patch("/api/users/current")
-      .set("X-API-TOKEN", "saslah")
+      .set("X-API-TOKEN", "salah")
       .send({
         name: "benar",
         password: "benar",
       });
-      
+
     logger.debug(response.body);
     expect(response.status).toBe(401);
     expect(response.body.errors).toBeDefined();
+  });
+
+  it("should be able to update current user", async () => {
+    const response = await supertest(web)
+      .patch("/api/users/current")
+      .set("X-API-TOKEN", "test")
+      .send({name: "benar"});
+    logger.debug(response.body);
+    expect(response.status).toBe(200);
+    expect(response.body.data).toBeDefined();
+    expect(response.body.data.name).toBe("benar");
   });
 });
