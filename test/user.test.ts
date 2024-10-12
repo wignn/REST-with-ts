@@ -2,6 +2,7 @@ import { logger } from "../src/application/loggin";
 import { web } from "./../src/application/web";
 import supertest from "supertest";
 import { userTest } from "./test-util";
+import bcrypt from "bcrypt";
 
 describe("POST /api/users", () => {
   it("should reject register new user if request is invali", async () => {
@@ -130,10 +131,12 @@ describe("PATCH /api/users/current", () => {
     const response = await supertest(web)
       .patch("/api/users/current")
       .set("X-API-TOKEN", "test")
-      .send({name: "benar"});
+      .send({name: "benar", password: "benar"});
     logger.debug(response.body);
     expect(response.status).toBe(200);
     expect(response.body.data).toBeDefined();
     expect(response.body.data.name).toBe("benar");
+    const user = await userTest.get();
+    expect(await bcrypt.compare("benar", user.password)).toBe(true);
   });
 });
