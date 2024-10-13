@@ -10,6 +10,8 @@ export type CreateBookRequest = {
     title: string;
     author: string;
     description: string;
+    genreId: number;
+    cover: string;
 }
 
 

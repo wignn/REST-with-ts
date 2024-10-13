@@ -31,6 +31,7 @@ model Book {
   title       String
   author      String
   description String
+  cover       String
   chapters    Chapter[]
   genreId     Int 
   genre       Genre      @relation(fields: [genreId], references: [id])
