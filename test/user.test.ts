@@ -156,7 +156,7 @@ describe("DELETE /api/users/current", () => {
 
     logger.debug(response.body);
     expect(response.status).toBe(200);
-    expect(response.body.data).toBeDefined();
+    expect(response.body.data).toBe("OK");
     const user = await userTest.get();
     expect(user.token).toBeNull();
   });
