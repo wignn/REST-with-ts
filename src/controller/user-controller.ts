@@ -1,7 +1,7 @@
 import { UserService } from "../service/user-service";
 import { CreateUserRequest, LoginUserRequest, UpdateUserRequest } from "./../model/user-mode";
 import { Request, Response, NextFunction } from "express";
-import { UserRequest } from "../type/user-request";
+import { UserRequest } from "../types/user-request";
 export class UserController {
   static async register(req: Request, res: Response, next: NextFunction) {
     try {
