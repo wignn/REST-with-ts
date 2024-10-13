@@ -40,4 +40,13 @@ export class UserController {
       next(err);
     }
   }
+
+  static async logut(req: UserRequest, res: Response, next: NextFunction) {
+    try {
+      await UserService.logout(req.user!);
+      res.status(200).json({ data:"OK" });
+    } catch (err) {
+      next(err);
+    }
+  }
 }

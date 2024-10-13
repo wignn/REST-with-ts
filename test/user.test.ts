@@ -140,3 +140,34 @@ describe("PATCH /api/users/current", () => {
     expect(await bcrypt.compare("benar", user.password)).toBe(true);
   });
 });
+
+describe("DELETE /api/users/current", () => {
+  beforeEach(async () => {
+    await userTest.create();
+  });
+
+  afterEach(async () => {
+    await userTest.delete();
+  });
+  it("should be able to logout", async () => {
+    const response = await supertest(web)
+      .delete("/api/users/current")
+      .set("X-API-TOKEN", "test");
+
+    logger.debug(response.body);
+    expect(response.status).toBe(200);
+    expect(response.body.data).toBeDefined();
+    const user = await userTest.get();
+    expect(user.token).toBeNull();
+  });
+
+  it("should be reject if token is wrong", async () => {
+    const response = await supertest(web)
+      .delete("/api/users/current")
+      .set("X-API-TOKEN", "salah");
+
+    logger.debug(response.body);
+    expect(response.status).toBe(401);
+    expect(response.body.errors).toBeDefined();
+  });
+});
