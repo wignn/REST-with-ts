@@ -32,7 +32,7 @@ model Book {
   author      String
   description String
   chapters    Chapter[]
-  genreId     Int
+  genreId     Int 
   genre       Genre      @relation(fields: [genreId], references: [id])
   bookmarks   Bookmark[]
 }
