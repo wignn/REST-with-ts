@@ -19,6 +19,7 @@ export class userTest {
         email: "test@gmail.com",
         password: await bcrypt.hash("test", 10),
         token: "test",
+        role: "USER",
       },
     });
   }
@@ -35,5 +36,15 @@ export class userTest {
     }
     
     return user;
+  }
+}
+
+export class bookTest {
+  static async deleteAll() {
+    await prismaClient.book.deleteMany({
+      where: {
+        title: "new book",
+      }
+    });
   }
 }

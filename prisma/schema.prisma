@@ -20,10 +20,10 @@ model User {
   email      String     @unique
   password   String
   role       String     @default("USER")
-  bookmarks  Bookmark[]
   token      String?
+  verified   String?
   kadaluarsa DateTime?
-
+  Bookmark Bookmark[]
 }
 
 model Book {
@@ -33,15 +33,14 @@ model Book {
   description String
   cover       String
   chapters    Chapter[]
-  genreId     Int 
-  genre       Genre      @relation(fields: [genreId], references: [id])
+  genres      Genre[]    @relation("BookGenres")
   bookmarks   Bookmark[]
 }
 
 model Genre {
   id    Int    @id @default(autoincrement())
   name  String
-  books Book[]
+  books Book[] @relation("BookGenres")
 }
 
 model Bookmark {
@@ -59,4 +58,12 @@ model Chapter {
   content String
   bookId  Int
   book    Book   @relation(fields: [bookId], references: [id])
+}
+
+
+enum Status {
+  Ongoing
+  Drop
+  Hiatus
+  Complete
 }
