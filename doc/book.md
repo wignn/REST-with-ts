@@ -6,7 +6,7 @@ Endpoint: POST /api/books
 
 Request Header :
 
-- X-API-TOKEN
+- X-API-token
 
 Request Body :
 
